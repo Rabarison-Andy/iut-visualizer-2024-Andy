@@ -15,8 +15,8 @@ import Board from "./objects/Board";
 import LogoIut from "./objects/LogoIut";
 import Cover from "./objects/Cover";
 import Box from "./objects/Box";
+import YamahaTT300 from "./objects/RecordPlayer";
 import audioController from "../utils/AudioController";
-import Cube from "./objects/Cube";
 
 class Scene {
   constructor() {}
@@ -93,6 +93,7 @@ class Scene {
     this.logoIut = new LogoIut();
     this.cover = new Cover();
     this.box = new Box();
+    this.recordplayer = new YamahaTT300();
     // this.cube = new Cube();
     // ....
 
@@ -147,7 +148,7 @@ class Scene {
     // on remove le group qui est rendu
     this.scene.remove(this.currentObject.group);
 
-    // on change le current object
+    // on change l'objet courrant
     switch (index) {
       case 0:
         // line
@@ -176,13 +177,8 @@ class Scene {
         this.currentObject = this.cover;
         break;
       case 4:
-          // logo iut
-        this.bloomParams.threshold = 0.6;
-        this.bloomPass.threshold = 0.6;
-  
-        this.camera.position.z = 20;
-        this.currentObject = this.box;
-        break;
+        this.camera.position.z = 0.5;
+        this.currentObject = this.recordplayer;
       default:
         break;
     }

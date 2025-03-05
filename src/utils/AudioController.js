@@ -47,7 +47,7 @@ class AudioController {
     const audioBuffer = await offlineCtx.decodeAudioData(buffer);
     // Use bpm-detective to detect the BPM
     this.bpm = detect(audioBuffer);
-    console.log(`Detected BPM: ${this.bpm}`);
+    //console.log(`Detected BPM: ${this.bpm}`);
     // return bpm;
   };
 
