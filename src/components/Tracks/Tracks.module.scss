@@ -12,6 +12,47 @@
   width: 250px;
 }
 
+.searchContainer {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+}
+
+.resetButton {
+  position: fixed;
+  bottom: 12px;
+  right: 330px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 120px;
+  height: 40px;
+  min-width: 120px;
+  min-height: 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 0.75rem;
+  padding: 0;
+  border: none;
+  z-index: 5;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  &:active {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+
 .wrapper {
   position: fixed;
   top: 0;
@@ -28,7 +69,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-top: 15vh;
+  margin-top: 17vh;
   max-height: 749px;
   overflow-y: auto;
   scrollbar-width: none;

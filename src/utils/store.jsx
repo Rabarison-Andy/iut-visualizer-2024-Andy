@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import TRACKS from "./TRACKS";
 
-const useStore = create((set) => ({
+const useStore = create((set, get) => ({
   // defaultTracks: TRACKS,
 
   // la liste processed par la librairie, et prête à être rendue dans le DOM
@@ -10,6 +10,39 @@ const useStore = create((set) => ({
     set(() => ({
       tracks: _tracks,
     })),
+  
+  // Track sélectionné
+  selectedTrack: null,
+  setSelectedTrack: (track) =>
+    set(() => ({
+      selectedTrack: track,
+    })),
+    
+  // Playlist
+  playlist: [],
+  
+  // Ajouter un track à la playlist
+  addToPlaylist: (track) => {
+    const { playlist } = get();
+    // Vérifier si le track n'est pas déjà dans la playlist
+    const trackExists = playlist.some((t) => 
+      t.title === track.title && 
+      t.src === track.src
+    );
+    
+    if (!trackExists) {
+      set((state) => ({
+        playlist: [...state.playlist, track],
+      }));
+    }
+  },
+  
+  // Supprimer un track de la playlist
+  removeFromPlaylist: (trackIndex) => {
+    set((state) => ({
+      playlist: state.playlist.filter((_, index) => index !== trackIndex),
+    }));
+  },
 }));
 
 export default useStore;

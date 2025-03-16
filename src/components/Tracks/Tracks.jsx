@@ -54,23 +54,32 @@ const Tracks = () => {
       // erreurs
     }
   };
+  
+  const resetTracks = () => {
+    // Réinitialiser la liste des tracks avec les tracks locaux
+    fetchMetadata(TRACKS, [], setTracks);
+  };
 
   return (
     <section className={s.wrapper}>
-      <input
-        type="text"
-        placeholder="Chercher un artiste"
-        className={s.searchInput}
-        onKeyDown={onKeyDown}
-      />
+      <div className={s.searchContainer}>
+        <input
+          type="text"
+          placeholder="Chercher un artiste"
+          className={s.searchInput}
+          onKeyDown={onKeyDown}
+        />
+      </div>
+      
+      <button 
+        className={s.resetButton} 
+        onClick={resetTracks}
+        title="Réinitialiser la liste des tracks"
+      >
+        Revenir au début
+      </button>
 
       <div className={s.tracks}>
-        <div className={s.header}>
-          <span className={s.title}>Titre</span>
-          <span className={s.duration}>Durée</span>
-          <span className={s.artist}>Artiste</span>
-        </div>
-
         {tracks.map((track, i) => (
           <Track
             key={track.title + i}

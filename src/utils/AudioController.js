@@ -2,7 +2,9 @@ import gsap from "gsap";
 import detect from "bpm-detective";
 
 class AudioController {
-  constructor() {}
+  constructor() {
+    this.isPlaying = false;
+  }
 
   setup() {
     this.ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -32,6 +34,11 @@ class AudioController {
       await this.detectBPM();
       // console.log(`The BPM is: ${bpm}`);
     });
+    
+    // Mettre à jour l'état de lecture lorsque l'audio se termine
+    this.audio.addEventListener("ended", () => {
+      this.isPlaying = false;
+    });
   }
 
   detectBPM = async () => {
@@ -54,6 +61,30 @@ class AudioController {
   play = (src) => {
     this.audio.src = src;
     this.audio.play();
+    this.isPlaying = true;
+  };
+  
+  pause = () => {
+    if (this.audio && this.isPlaying) {
+      this.audio.pause();
+      this.isPlaying = false;
+    }
+  };
+  
+  resume = () => {
+    if (this.audio && !this.isPlaying) {
+      this.audio.play();
+      this.isPlaying = true;
+    }
+  };
+  
+  togglePlayPause = () => {
+    if (this.isPlaying) {
+      this.pause();
+    } else {
+      this.resume();
+    }
+    return this.isPlaying;
   };
 
   tick = () => {
